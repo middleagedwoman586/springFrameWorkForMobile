@@ -1,7 +1,6 @@
 package Flow;
 
-import Pages.impl.HomePageImpl;
-import Pages.impl.RegistrationPageImpl;
+
 import Pages.pages.HomePage;
 import Pages.pages.RegistrationPage;
 import Utils.WaitUtils;
