@@ -9,24 +9,27 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.openqa.selenium.WebDriver;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.MalformedURLException;
 
 @RunWith(JUnit4.class)
+@ContextConfiguration
 public class BaseTest {
 
     protected WebDriver webDriver;
 
-//    @Before
-//    public void initDriver() throws MalformedURLException {
-//        webDriver = WebDriverConfig.setWebDriver(SupportedDrivers.APPIUM);
-//
-//    }
+    @Before
+    public void initDriver() throws MalformedURLException {
+
+        webDriver = WebDriverConfig.setWebDriver(SupportedDrivers.CHROME);
+    }
 
     @After
     public void tearDown() {
-//        WebDriverConfig.clearCookies();
-//        WebDriverConfig.tearDown();
+
+        WebDriverConfig.tearDown();
     }
 
 }

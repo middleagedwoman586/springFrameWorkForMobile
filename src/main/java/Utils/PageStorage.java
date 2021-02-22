@@ -1,9 +1,9 @@
 package Utils;
 
-import Pages.pages.BasePage;
-import Pages.pages.HomePage;
+import packageWithBeans.Pages.BasePage;
+import packageWithBeans.Pages.HomePage;
 import Enum.Pages;
-import Pages.pages.RegistrationPage;
+import packageWithBeans.Pages.RegistrationPage;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package Pages.pages;
+package packageWithBeans.Pages;
 
 import Config.WaitConfig;
 import Config.WebDriverConfig;
@@ -8,11 +8,10 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
-@Component
+
 public abstract class BasePage {
     public abstract String getUrl();
     String module="dsd";
@@ -26,12 +25,24 @@ public abstract class BasePage {
                 .setDefaultExplicitTimeout(10)
                 .build();
         WaitUtils.setWaitConfig(waitConfig);
-        PageFactory.initElements(getWebDriver(), this);
+        switch (getDriverName()){
+            case ("appium"):
+                PageFactory.initElements(new AppiumFieldDecorator(getWebDriver()), this);
+                break;
+            case ("chrome"):
+                PageFactory.initElements(getWebDriver(), this);
+                break;
+            default:
+                throw new IllegalStateException("This browser isn't supported!");
 
-    }
+            }
+        }
+
+
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
+
         PageFactory.initElements(driver, this);
     }
     public BasePage(AppiumDriver<MobileElement> driver1){
@@ -41,6 +52,9 @@ public abstract class BasePage {
 
     public WebDriver getWebDriver() {
         return WebDriverConfig.getDriverInstance();
+    }
+    public String getDriverName(){
+        return WebDriverConfig.getDriverName();
     }
 
     public BasePage open() {

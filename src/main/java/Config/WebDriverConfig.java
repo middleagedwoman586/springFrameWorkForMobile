@@ -17,15 +17,16 @@ import java.util.Map;
 
 public class WebDriverConfig {
     private static WebDriver driverInstance;
+    private static String driverName;
     private WebDriverConfig() {
 
     }
 
     public static WebDriver setWebDriver(SupportedDrivers driver) throws MalformedURLException {
         if (driverInstance != null) return driverInstance;
-        String deviceName = driver.getDeviceName();
+        driverName = driver.getDeviceName();
 
-        switch (deviceName) {
+        switch (driverName) {
             case ("chrome"): {
                 System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
                 Map<String, String> mobileEmulation = new HashMap<>();
@@ -58,11 +59,10 @@ public class WebDriverConfig {
     public static WebDriver getDriverInstance() {
         return driverInstance;
     }
-
-    public static void clearCookies() {
-        if (driverInstance != null) driverInstance.manage().deleteAllCookies();
-        ;
+    public static String getDriverName(){
+       return driverName;
     }
+
 
     public static void tearDown() {
         if (driverInstance != null) {

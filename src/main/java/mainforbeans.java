@@ -1,15 +1,17 @@
-import Pages.pages.HomePage;
+import Config.BeanConfig;
+//import packageWithBeans.Flow.AppiumRegistrationSteps;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import packageWithBeans.Flow.AppiumRegistrationSteps;
+
 
 public class mainforbeans {
-    private String module;
 
-    public String getModule() {
-        return module;
-    }
 
     public static void main(String[] args) {
 
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(BeanConfig.class);
+        AppiumRegistrationSteps d = ctx.getBean(AppiumRegistrationSteps.class);
+        System.out.println(d.getAnwser());
     }
 }

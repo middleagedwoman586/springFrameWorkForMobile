@@ -1,7 +1,7 @@
 package Enum;
-import Pages.pages.BasePage;
-import Pages.pages.HomePage;
-import Pages.pages.RegistrationPage;
+import packageWithBeans.Pages.BasePage;
+import packageWithBeans.Pages.HomePage;
+import packageWithBeans.Pages.RegistrationPage;
 
 public enum Pages {
     HOME(HomePage.class),

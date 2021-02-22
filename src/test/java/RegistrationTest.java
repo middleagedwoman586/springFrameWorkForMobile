@@ -1,14 +1,11 @@
-import Flow.AppiumRegistrationSteps;
-import Flow.IRegistrationSteps;
-import Flow.WebRegistrationSteps;
-import Pages.pages.HomePage;
+import packageWithBeans.Flow.AppiumRegistrationSteps;
+import packageWithBeans.Flow.IRegistrationSteps;
+import packageWithBeans.Flow.WebRegistrationSteps;
+import packageWithBeans.Pages.HomePage;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 
 @ActiveProfiles("WEB")
 public class RegistrationTest extends BaseTest {
@@ -16,15 +13,16 @@ public class RegistrationTest extends BaseTest {
     IRegistrationSteps iRegistrationSteps;
     @Autowired
     WebRegistrationSteps webRegistrationSteps;
-    //  @Autowired
-//    AppiumRegistrationSteps appiumRegistrationSteps;
+    @Autowired
+    AppiumRegistrationSteps appiumRegistrationSteps;
     @Autowired
     HomePage homePage;
 
     @Test
-    public void checkProfile() {
-        System.out.println("dsdsd");
-        Assert.assertTrue(iRegistrationSteps instanceof WebRegistrationSteps);
+    public void checkIf() {
+    String exp= "Web";
+
+    Assert.assertEquals(appiumRegistrationSteps.getAnwser(), exp);
     }
 
     @Test
@@ -32,9 +30,10 @@ public class RegistrationTest extends BaseTest {
         final String errorMessage = "Пароль має бути не менше 6 символів";
 //        appiumRegistrationSteps = new AppiumRegistrationSteps();
 //        appiumRegistrationSteps.goToMenu();
+//        appiumRegistrationSteps.goToRegistrationPage();
 //        appiumRegistrationSteps.setFirstName("sd");
 //        appiumRegistrationSteps.setLastName("sdf");
-
+//
         webRegistrationSteps = new WebRegistrationSteps();
         webRegistrationSteps.goToMenu();
         webRegistrationSteps.goToRegistrationPage();

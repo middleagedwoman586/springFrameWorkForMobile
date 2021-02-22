@@ -1,4 +1,5 @@
-package Flow;
+package packageWithBeans.Flow;
+
 
 public interface IRegistrationSteps {
     void goToMenu();
@@ -8,4 +9,5 @@ public interface IRegistrationSteps {
     void setEmailOrPhone(String value);
     void setPasswd(String value);
     void clickSubmit();
+    String getAnwser();
 }
