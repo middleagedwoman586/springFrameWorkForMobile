@@ -1,6 +1,7 @@
 package packageWithBeans.Flow;
 
 
+import org.springframework.context.annotation.Bean;
 import packageWithBeans.Pages.HomePage;
 import packageWithBeans.Pages.RegistrationPage;
 import Utils.WaitUtils;
@@ -10,7 +11,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
-
+@Profile("WEB")
 public class WebRegistrationSteps implements IRegistrationSteps {
     @Autowired
     HomePage homePage;
@@ -19,7 +20,6 @@ public class WebRegistrationSteps implements IRegistrationSteps {
 
     @Override
     public void goToMenu() {
-       homePage=new HomePage();
         homePage.open();
         homePage.getMenu().click();
         WaitUtils.implicitWait(homePage.getWebDriver());
@@ -34,14 +34,14 @@ public class WebRegistrationSteps implements IRegistrationSteps {
 
     @Override
     public void setFirstName(String value) {
-        registrationPage=new RegistrationPage();
+        registrationPage = new RegistrationPage();
         registrationPage.getFirstNameInput().sendKeys(value);
     }
 
     @Override
     public void setLastName(String value) {
         registrationPage.getLastNameInput().sendKeys(value);
-   }
+    }
 
     @Override
     public void setEmailOrPhone(String value) {
@@ -62,6 +62,6 @@ public class WebRegistrationSteps implements IRegistrationSteps {
 
     @Override
     public String getAnwser() {
-        return "Web";
+        return "sdasddgg";
     }
 }

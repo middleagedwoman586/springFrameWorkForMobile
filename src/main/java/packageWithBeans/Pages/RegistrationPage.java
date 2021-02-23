@@ -4,47 +4,16 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.springframework.stereotype.Component;
+
+import java.net.MalformedURLException;
 
 @Component
 public class RegistrationPage extends BasePage {
 
-
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"ua.com.rozetka.shop:id/sign_up_et_first_name\")")
-    private MobileElement firstName;
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"ua.com.rozetka.shop:id/sign_up_et_last_name\")")
-    private MobileElement lastName;
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"ua.com.rozetka.shop:id/sign_up_et_login\")")
-    private MobileElement telephoneOrEmail;
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"ua.com.rozetka.shop:id/sign_up_et_password\")")
-    private MobileElement password;
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"ua.com.rozetka.shop:id/sign_up_b_register\")")
-    private MobileElement submit;
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"ua.com.rozetka.shop:id/textinput_error\")")
-    private MobileElement error;
-
-    public MobileElement getError() {
-        return error;
-    }
-
-    public MobileElement getFirstName() {
-        return firstName;
-    }
-
-    public MobileElement getLastName() {
-        return lastName;
-    }
-
-    public MobileElement getTelephoneOrEmail() {
-        return telephoneOrEmail;
-    }
-
-    public MobileElement getPassword() {
-        return password;
-    }
-
-    public MobileElement getSubmit() {
-        return submit;
+    public RegistrationPage()  {
+        PageFactory.initElements(getWebDriver(), this);
     }
 
     @FindBy(xpath = "//input[@formcontrolname='name']")

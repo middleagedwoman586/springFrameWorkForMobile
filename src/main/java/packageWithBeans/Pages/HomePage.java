@@ -1,10 +1,13 @@
 package packageWithBeans.Pages;
 
+import Config.WebDriverConfig;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.springframework.stereotype.Component;
@@ -13,26 +16,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class HomePage extends BasePage {
 
+    public HomePage() {
+        PageFactory.initElements(getWebDriver(), this);
+    }
 
     @FindBy(xpath = "/html/body/app-root/div/div[1]/rz-header/header/div/div/rz-mobile-user-menu/button")
     private WebElement menu;
     @FindBy(xpath = "//button[text()=' Реєстрація ']")
     private WebElement registration;
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"ua.com.rozetka.shop:id/graph_more\")")
-    private MobileElement more;
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"ua.com.rozetka.shop:id/item_menu_auth_tv_sign_up\")")
-    private MobileElement registr;
-
-
-
-    public MobileElement getMore() {
-        return more;
-    }
-
-    public MobileElement getRegistr() {
-        return registr;
-    }
 
     public WebElement getMenu() {
         return menu;
@@ -47,5 +39,9 @@ public class HomePage extends BasePage {
         return "https://rozetka.com.ua/ua/";
     }
 
+    public HomePage open() {
+        getWebDriver().get(getUrl());
+        return this;
+    }
 
 }

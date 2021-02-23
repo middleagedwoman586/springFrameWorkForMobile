@@ -7,59 +7,62 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import packageWithBeans.Pages.HomePage;
+import packageWithBeans.Pages.HomePageAppium;
 import packageWithBeans.Pages.RegistrationPage;
+import packageWithBeans.Pages.RegistrationPageAppium;
 
 @Component
+@Profile("APPIUM")
 public class AppiumRegistrationSteps implements IRegistrationSteps {
-
-    HomePage homePage;
-
-    RegistrationPage registrationPage;
+    @Autowired
+    HomePageAppium homePageAppium;
+    @Autowired
+    RegistrationPageAppium registrationPageAppium;
 
     @Override
     public void goToMenu() {
-        homePage=new HomePage();
-        WaitUtils.explicitWait(homePage.getWebDriver(), ExpectedConditions.visibilityOf(homePage.getMore()));
-        homePage.getMore().click();
+
+       // WaitUtils.explicitWait(homePageAppium.getWebDriver(), ExpectedConditions.visibilityOf(homePageAppium.getMore()));
+        homePageAppium.getMore().click();
 
     }
 
     @Override
     public void goToRegistrationPage() {
-        WaitUtils.explicitWait(homePage.getWebDriver(), ExpectedConditions.elementToBeClickable(homePage.getRegistr()));
-        homePage.getRegistr().click();
+        WaitUtils.explicitWait(homePageAppium.getWebDriver(), ExpectedConditions.elementToBeClickable(homePageAppium.getRegistr()));
+        homePageAppium.getRegistr().click();
     }
 
     @Override
     public void setFirstName(String value) {
-        registrationPage = new RegistrationPage();
-        WaitUtils.explicitWait(registrationPage.getWebDriver(), ExpectedConditions.elementToBeClickable(registrationPage.getFirstName()));
-        registrationPage.getFirstName().sendKeys(value);
+        WaitUtils.explicitWait(registrationPageAppium.getWebDriver(), ExpectedConditions.elementToBeClickable(registrationPageAppium.getFirstName()));
+        registrationPageAppium.getFirstName().sendKeys(value);
     }
 
     @Override
     public void setLastName(String value) {
-        registrationPage.getLastName().sendKeys(value);
+        registrationPageAppium.getLastName().sendKeys(value);
     }
 
     @Override
     public void setEmailOrPhone(String value) {
-        registrationPage.getTelephoneOrEmail().sendKeys(value);
+        registrationPageAppium.getTelephoneOrEmail().sendKeys(value);
     }
 
 
     @Override
     public void setPasswd(String value) {
-        registrationPage.getPassword().sendKeys(value);
+        registrationPageAppium.getPassword().sendKeys(value);
     }
 
     @Override
     public void clickSubmit() {
-        registrationPage.getSubmit().click();
+        registrationPageAppium.getSubmit().click();
     }
 
     @Override
     public String getAnwser() {
-        return "Appium";
+        //return registrationPageAppium.getPassword().toString();
+        return "dssdds";
     }
 }
