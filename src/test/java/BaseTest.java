@@ -24,7 +24,7 @@ import java.net.MalformedURLException;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {BeanConfig.class,BeanConfigTest.class})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class})
-@ActiveProfiles("APPIUM")
+@ActiveProfiles("WEB")
 public class BaseTest {
 
 
@@ -39,6 +39,7 @@ public class BaseTest {
 
     @Bean
     @Profile("WEB")
+    @Before
     public void initDriverWeb() throws MalformedURLException {
         WebDriverConfig.setWebDriver(SupportedDrivers.CHROME);
     }
