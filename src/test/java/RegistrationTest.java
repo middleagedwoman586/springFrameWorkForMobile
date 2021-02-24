@@ -1,26 +1,30 @@
-import Config.BeanConfig;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import packageWithBeans.Flow.AppiumRegistrationSteps;
-import packageWithBeans.Flow.IRegistrationSteps;
-import packageWithBeans.Flow.WebRegistrationSteps;
-import packageWithBeans.Pages.HomePage;
+
+import config.BeanConfig;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import packageWithBeans.steps.IRegistrationSteps;
 
-@ActiveProfiles("WEB")
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {BeanConfig.class})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class})
+@ActiveProfiles("APPIUM")
 public class RegistrationTest extends BaseTest {
 
     @Autowired
     IRegistrationSteps iRegistrationSteps;
-    @Autowired
-    ApplicationContext context;
+
 
 
     @Test
-    public void register()  {
+    public void register() {
         final String errorMessage = "Пароль має бути не менше 6 символів";
 
         iRegistrationSteps.goToMenu();
@@ -32,7 +36,7 @@ public class RegistrationTest extends BaseTest {
         iRegistrationSteps.clickSubmit();
 
 
-//        Assert.assertEquals(registrationPage.getErrorMessage(),errorMessage);
+        Assert.assertEquals(iRegistrationSteps.getAnwser(),errorMessage);
 
 
     }

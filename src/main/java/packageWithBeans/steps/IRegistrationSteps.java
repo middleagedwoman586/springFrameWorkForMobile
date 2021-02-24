@@ -1,4 +1,4 @@
-package packageWithBeans.Flow;
+package packageWithBeans.steps;
 
 
 public interface IRegistrationSteps {

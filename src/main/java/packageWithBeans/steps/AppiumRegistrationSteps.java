@@ -1,15 +1,13 @@
-package packageWithBeans.Flow;
+package packageWithBeans.steps;
 
 
-import Utils.WaitUtils;
+import utils.WaitUtils;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-import packageWithBeans.Pages.HomePage;
-import packageWithBeans.Pages.HomePageAppium;
-import packageWithBeans.Pages.RegistrationPage;
-import packageWithBeans.Pages.RegistrationPageAppium;
+import packageWithBeans.pages.HomePageAppium;
+import packageWithBeans.pages.RegistrationPageAppium;
 
 @Component
 @Profile("APPIUM")
@@ -22,20 +20,20 @@ public class AppiumRegistrationSteps implements IRegistrationSteps {
     @Override
     public void goToMenu() {
 
-       // WaitUtils.explicitWait(homePageAppium.getWebDriver(), ExpectedConditions.visibilityOf(homePageAppium.getMore()));
+        WaitUtils.explicitWait(homePageAppium.getDriver(), ExpectedConditions.visibilityOf(homePageAppium.getMore()));
         homePageAppium.getMore().click();
 
     }
 
     @Override
     public void goToRegistrationPage() {
-        WaitUtils.explicitWait(homePageAppium.getWebDriver(), ExpectedConditions.elementToBeClickable(homePageAppium.getRegistr()));
+        WaitUtils.explicitWait(homePageAppium.getDriver(), ExpectedConditions.elementToBeClickable(homePageAppium.getRegistr()));
         homePageAppium.getRegistr().click();
     }
 
     @Override
     public void setFirstName(String value) {
-        WaitUtils.explicitWait(registrationPageAppium.getWebDriver(), ExpectedConditions.elementToBeClickable(registrationPageAppium.getFirstName()));
+        WaitUtils.explicitWait(registrationPageAppium.getDriver(), ExpectedConditions.elementToBeClickable(registrationPageAppium.getFirstName()));
         registrationPageAppium.getFirstName().sendKeys(value);
     }
 
@@ -62,7 +60,7 @@ public class AppiumRegistrationSteps implements IRegistrationSteps {
 
     @Override
     public String getAnwser() {
-        //return registrationPageAppium.getPassword().toString();
-        return "dssdds";
+        return registrationPageAppium.getError().getText();
+
     }
 }

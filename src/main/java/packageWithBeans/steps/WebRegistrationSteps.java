@@ -1,10 +1,9 @@
-package packageWithBeans.Flow;
+package packageWithBeans.steps;
 
 
-import org.springframework.context.annotation.Bean;
-import packageWithBeans.Pages.HomePage;
-import packageWithBeans.Pages.RegistrationPage;
-import Utils.WaitUtils;
+import packageWithBeans.pages.HomePage;
+import packageWithBeans.pages.RegistrationPage;
+import utils.WaitUtils;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -20,7 +19,7 @@ public class WebRegistrationSteps implements IRegistrationSteps {
 
     @Override
     public void goToMenu() {
-        homePage.open();
+
         homePage.getMenu().click();
         WaitUtils.implicitWait(homePage.getWebDriver());
 
@@ -34,7 +33,6 @@ public class WebRegistrationSteps implements IRegistrationSteps {
 
     @Override
     public void setFirstName(String value) {
-        registrationPage = new RegistrationPage();
         registrationPage.getFirstNameInput().sendKeys(value);
     }
 
@@ -62,6 +60,6 @@ public class WebRegistrationSteps implements IRegistrationSteps {
 
     @Override
     public String getAnwser() {
-        return "sdasddgg";
+        return registrationPage.getErrorMessage().getText();
     }
 }

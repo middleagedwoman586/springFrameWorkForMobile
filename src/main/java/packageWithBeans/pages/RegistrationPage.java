@@ -1,19 +1,19 @@
-package packageWithBeans.Pages;
+package packageWithBeans.pages;
 
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AndroidFindBy;
+import config.IConfig;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import java.net.MalformedURLException;
-
 @Component
+@Profile("WEB")
 public class RegistrationPage extends BasePage {
-
-    public RegistrationPage()  {
-        PageFactory.initElements(getWebDriver(), this);
+    @Autowired
+    public RegistrationPage(IConfig<WebDriver> config) {
+        super(config);
     }
 
     @FindBy(xpath = "//input[@formcontrolname='name']")
@@ -28,6 +28,8 @@ public class RegistrationPage extends BasePage {
     private WebElement passwordInput;
     @FindBy(css = "button[type=submit]")
     private WebElement submitButton;
+    @FindBy(xpath = "//p[@class='form__caption' and contains(text(),'Пароль')]")
+    private WebElement errorMessage;
 
     public WebElement getFirstNameInput() {
         return firstNameInput;
@@ -52,9 +54,8 @@ public class RegistrationPage extends BasePage {
     public WebElement getSubmitButton() {
         return submitButton;
     }
-
-    @Override
-    public String getUrl() {
-        return null;
+    public WebElement getErrorMessage(){
+        return errorMessage;
     }
+
 }

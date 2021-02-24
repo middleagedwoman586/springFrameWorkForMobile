@@ -1,23 +1,23 @@
-package packageWithBeans.Pages;
+package packageWithBeans.pages;
 
-import Config.WebDriverConfig;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AndroidFindBy;
-
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import config.IConfig;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 
 @Component
+@Profile("WEB")
 public class HomePage extends BasePage {
 
-    public HomePage() {
-        PageFactory.initElements(getWebDriver(), this);
+    private WebDriver driver;
+
+    @Autowired
+    public HomePage(IConfig<WebDriver> config) {
+        super(config);
     }
 
     @FindBy(xpath = "/html/body/app-root/div/div[1]/rz-header/header/div/div/rz-mobile-user-menu/button")
@@ -34,14 +34,8 @@ public class HomePage extends BasePage {
         return registration;
     }
 
-    @Override
-    public String getUrl() {
-        return "https://rozetka.com.ua/ua/";
-    }
 
-    public HomePage open() {
-        getWebDriver().get(getUrl());
-        return this;
-    }
+
+
 
 }
